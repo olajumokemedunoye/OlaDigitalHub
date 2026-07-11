@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 380" width="100%" height="100%">
+  <rect width="560" height="380" fill="#F5F7FA"></rect>
+  <text x="20" y="30" font-family="IBM Plex Mono, monospace" font-size="12" fill="#52657A">EXECUTIVE HR DASHBOARD — Q2 SAMPLE</text>
+
+  
+  <g font-family="Inter, sans-serif">
+    <rect x="20" y="46" width="122" height="64" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+    <text x="32" y="66" font-size="9" fill="#52657A">HEADCOUNT</text>
+    <text x="32" y="90" font-size="20" fill="#1F3A5F" font-family="IBM Plex Mono, monospace" font-weight="600">1,240</text>
+
+    <rect x="152" y="46" width="122" height="64" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+    <text x="164" y="66" font-size="9" fill="#52657A">ATTRITION</text>
+    <text x="164" y="90" font-size="20" fill="#00807f" font-family="IBM Plex Mono, monospace" font-weight="600">14.2%</text>
+
+    <rect x="284" y="46" width="122" height="64" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+    <text x="296" y="66" font-size="9" fill="#52657A">TIME TO HIRE</text>
+    <text x="296" y="90" font-size="20" fill="#1F3A5F" font-family="IBM Plex Mono, monospace" font-weight="600">34d</text>
+
+    <rect x="416" y="46" width="122" height="64" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+    <text x="428" y="66" font-size="9" fill="#52657A">ENGAGEMENT</text>
+    <text x="428" y="90" font-size="20" fill="#1F3A5F" font-family="IBM Plex Mono, monospace" font-weight="600">7.4</text>
+  </g>
+
+  
+  <rect x="20" y="126" width="330" height="150" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+  <text x="32" y="146" font-size="10" fill="#52657A" font-family="Inter, sans-serif">MONTHLY ATTRITION TREND</text>
+  <polyline points="32,240 72,232 112,244 152,228 192,236 232,210 272,220 312,196 340,204" fill="none" stroke="#00A8A8" stroke-width="2.5"></polyline>
+  <polyline points="32,236 72,236 112,232 152,232 192,228 232,228 272,224 312,224 340,220" fill="none" stroke="#1F3A5F" stroke-width="1.5" stroke-dasharray="4 3"></polyline>
+  <line x1="32" y1="260" x2="340" y2="260" stroke="#E1E6ED"></line>
+
+  
+  <rect x="366" y="126" width="172" height="150" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+  <text x="378" y="146" font-size="10" fill="#52657A" font-family="Inter, sans-serif">HEADCOUNT BY DEPT</text>
+  <rect x="382" y="200" width="16" height="60" fill="#1F3A5F"></rect>
+  <rect x="410" y="180" width="16" height="80" fill="#00A8A8"></rect>
+  <rect x="438" y="220" width="16" height="40" fill="#1F3A5F"></rect>
+  <rect x="466" y="160" width="16" height="100" fill="#00A8A8"></rect>
+  <rect x="494" y="210" width="16" height="50" fill="#1F3A5F"></rect>
+  <line x1="378" y1="260" x2="526" y2="260" stroke="#E1E6ED"></line>
+
+  
+  <rect x="20" y="290" width="330" height="72" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+  <text x="32" y="308" font-size="10" fill="#52657A" font-family="Inter, sans-serif">GENDER MIX BY LEVEL</text>
+  <rect x="32" y="320" width="130" height="14" fill="#1F3A5F"></rect>
+  <rect x="162" y="320" width="90" height="14" fill="#00A8A8"></rect>
+  <rect x="32" y="340" width="80" height="14" fill="#1F3A5F"></rect>
+  <rect x="112" y="340" width="140" height="14" fill="#00A8A8"></rect>
+
+  
+  <rect x="366" y="290" width="172" height="72" rx="4" fill="#fff" stroke="#E1E6ED"></rect>
+  <text x="378" y="308" font-size="10" fill="#52657A" font-family="Inter, sans-serif">TURNOVER REASONS</text>
+  <circle cx="410" cy="335" r="20" fill="none" stroke="#E1E6ED" stroke-width="10"></circle>
+  <circle cx="410" cy="335" r="20" fill="none" stroke="#00A8A8" stroke-width="10" stroke-dasharray="70 126" stroke-dashoffset="0"></circle>
+  <circle cx="410" cy="335" r="20" fill="none" stroke="#1F3A5F" stroke-width="10" stroke-dasharray="40 126" stroke-dashoffset="-70"></circle>
+  <text x="446" y="330" font-size="8" fill="#52657A">Pay (36%)</text>
+  <text x="446" y="343" font-size="8" fill="#52657A">Manager (21%)</text>
+</svg>
