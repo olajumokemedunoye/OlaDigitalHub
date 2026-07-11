@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Executive HR Dashboard — OlaDigitalHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%231F3A5F%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%277%27 fill=%27%2300A8A8%27/%3E%3C/svg%3E">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7EPNFPRV03"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7EPNFPRV03', { send_page_view: true, cookie_flags: 'SameSite=None;Secure' });
+</script>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .db-page{background:var(--grey); min-height:100vh;}
+  .db-wrap{max-width:1180px; margin:0 auto; padding:32px 24px 80px;}
+  .db-head{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px;}
+  .db-kpis{display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:22px;}
+  @media (max-width:900px){ .db-kpis{grid-template-columns:repeat(2,1fr);} }
+  .db-kpi{background:#fff; border:1px solid var(--grey-line); border-radius:8px; padding:16px 18px;}
+  .db-kpi .label{font-size:0.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft);}
+  .db-kpi .val{font-size:1.5rem; color:var(--navy-deep); font-family:'IBM Plex Mono',monospace; margin-top:4px;}
+  .db-kpi .delta{font-size:0.76rem; margin-top:2px;}
+  .db-grid{display:grid; grid-template-columns:2fr 1fr; gap:18px; margin-bottom:18px;}
+  .db-grid.thirds{grid-template-columns:1fr 1fr 1fr;}
+  @media (max-width:900px){ .db-grid, .db-grid.thirds{grid-template-columns:1fr;} }
+  .panel{background:#fff; border:1px solid var(--grey-line); border-radius:8px; padding:18px;}
+  .panel h4{margin:0 0 12px; font-family:'Inter',sans-serif; font-size:0.85rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); font-weight:600;}
+  .filter-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .filter-row select{padding:8px 12px; border:1px solid var(--grey-line); border-radius:4px; font-family:'Inter',sans-serif; font-size:0.85rem; background:#fff;}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand"><span class="dot"></span>OlaDigitalHub</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="fractional-analytics.html">Fractional Analytics</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="templates.html">Templates</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="book-call.html" class="nav-cta">Book a Discovery Call</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<div class="db-page">
+  <div class="db-wrap">
+    <div class="breadcrumb" style="padding-top:20px;"><a href="index.html">Home</a> / Sample Dashboard</div>
+
+    <div class="db-head">
+      <div>
+        <div class="eyebrow">Sample deliverable</div>
+        <h1 style="font-size:1.7rem; margin-bottom:4px;">Executive HR Dashboard — Northfield Retail Group</h1>
+        <p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">Synthetic data, for illustration only · Refreshed monthly for real engagements</p>
+      </div>
+      <div class="filter-row">
+        <select id="deptFilter"><option>All departments</option><option>Retail Stores</option><option>Distribution</option><option>Support Centre</option><option>Digital</option></select>
+        <select id="periodFilter"><option>Last 12 months</option><option>Last 6 months</option><option>Last 24 months</option></select>
+      </div>
+    </div>
+
+    <div class="db-kpis">
+      <div class="db-kpi"><div class="label">Headcount</div><div class="val">1,240</div><div class="delta" style="color:#1F8A5F;">▲ 2.1% QoQ</div></div>
+      <div class="db-kpi"><div class="label">Attrition rate</div><div class="val">14.2%</div><div class="delta" style="color:#B5433A;">▲ 1.4pt YoY</div></div>
+      <div class="db-kpi"><div class="label">Time to hire</div><div class="val">34 days</div><div class="delta" style="color:#B5433A;">▲ 4 days</div></div>
+      <div class="db-kpi"><div class="label">Cost per hire</div><div class="val">£3,120</div><div class="delta" style="color:#1F8A5F;">▼ £180</div></div>
+      <div class="db-kpi"><div class="label">Engagement score</div><div class="val">7.4 / 10</div><div class="delta" style="color:#1F8A5F;">▲ 0.3 pts</div></div>
+    </div>
+
+    <div class="db-grid">
+      <div class="panel">
+        <h4>Monthly attrition — actual vs. target</h4>
+        <canvas id="chartAttrition" height="110"></canvas>
+      </div>
+      <div class="panel">
+        <h4>Turnover reasons</h4>
+        <canvas id="chartReasons" height="110"></canvas>
+      </div>
+    </div>
+
+    <div class="db-grid thirds">
+      <div class="panel">
+        <h4>Headcount by department</h4>
+        <canvas id="chartDept" height="140"></canvas>
+      </div>
+      <div class="panel">
+        <h4>Gender mix by level</h4>
+        <canvas id="chartDiversity" height="140"></canvas>
+      </div>
+      <div class="panel">
+        <h4>Time to hire by department (days)</h4>
+        <canvas id="chartTTH" height="140"></canvas>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h4>Manager scorecard — highest regretted attrition (synthetic sample)</h4>
+      <table class="svc-table">
+        <thead><tr><th>Store / Team</th><th>Headcount</th><th>Regretted attrition</th><th>Engagement</th><th>Flag</th></tr></thead>
+        <tbody>
+          <tr><td>Store 014 — Leeds Central</td><td>38</td><td class="price">21.4%</td><td>6.1</td><td>🔴 Review</td></tr>
+          <tr><td>Store 027 — Manchester Arndale</td><td>45</td><td class="price">19.8%</td><td>6.4</td><td>🔴 Review</td></tr>
+          <tr><td>Store 003 — Bristol Cabot</td><td>29</td><td class="price">17.2%</td><td>6.9</td><td>🟡 Watch</td></tr>
+          <tr><td>Distribution — Midlands Hub</td><td>112</td><td class="price">12.1%</td><td>7.6</td><td>🟢 Stable</td></tr>
+          <tr><td>Support Centre — Finance</td><td>24</td><td class="price">6.3%</td><td>8.2</td><td>🟢 Stable</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">This is a static sample built for demonstration. A live engagement connects directly to your HRIS export and refreshes automatically each month.</div>
+    <div class="btn-row" style="margin-top:20px;">
+      <a href="book-call.html" class="btn btn-primary">Get this built for your data</a>
+      <a href="templates.html#exec-dashboard" class="btn btn-outline">Buy the self-serve template — £79</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-connect">
+      <span class="footer-connect-label">Connect</span>
+      <a href="mailto:olajumokemedunoye@gmail.com">Email</a>
+      <a href="https://github.com/olajumokemedunoye" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.fiverr.com/olajumokemed" target="_blank" rel="noopener">Fiverr</a>
+      <a href="https://www.notion.so/OlaDigitalHub-Launch-Ops-Hub-399750eba04e81f4a6fafd433add30ec" target="_blank" rel="noopener">Notion Hub</a>
+      <a href="https://payhip.com/OlaDigitalHub" target="_blank" rel="noopener">Payhip Store</a>
+    </div>
+    <div class="footer-bottom">
+    <span>© 2026 OlaDigitalHub. All rights reserved.</span>
+    <a href="index.html" style="color:#8FA3BC;">Back to home</a>
+  </div>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

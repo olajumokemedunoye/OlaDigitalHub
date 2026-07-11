@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — OlaDigitalHub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%231F3A5F%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%277%27 fill=%27%2300A8A8%27/%3E%3C/svg%3E">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7EPNFPRV03"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7EPNFPRV03', { send_page_view: true, cookie_flags: 'SameSite=None;Secure' });
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand"><span class="dot"></span>OlaDigitalHub</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="fractional-analytics.html">Fractional Analytics</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="templates.html">Templates</a></li>
+      <li><a href="case-studies.html">Case Studies</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="book-call.html" class="nav-cta">Book a Discovery Call</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<section style="padding-top:64px;">
+  <div class="wrap grid-2" style="align-items:start;">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h1>Questions before you book a call?</h1>
+      <p class="lede" style="color:var(--ink-soft);">Send a message directly — for template support, partnership questions, or anything that doesn't need a full discovery call.</p>
+      <div style="margin-top:28px;">
+        <p><strong style="color:var(--navy-deep);">Email</strong><br><a href="mailto:olajumokemedunoye@gmail.com" style="color:var(--teal-deep);">olajumokemedunoye@gmail.com</a></p>
+        <p><strong style="color:var(--navy-deep);">Response time</strong><br>Within 1 business day — replies come straight from my inbox</p>
+        <p><strong style="color:var(--navy-deep);">LinkedIn</strong><br>linkedin.com/company/oladigitalhub</p>
+      </div>
+    </div>
+    <div class="card">
+      <form onsubmit="sendContactEmail(event)">
+        <label style="display:block; font-size:0.82rem; color:var(--ink-soft); margin-bottom:6px;">Name</label>
+        <input required id="c-name" style="width:100%; padding:11px 12px; border:1px solid var(--grey-line); border-radius:4px; margin-bottom:16px; font-family:'Inter',sans-serif;">
+        <label style="display:block; font-size:0.82rem; color:var(--ink-soft); margin-bottom:6px;">Email</label>
+        <input type="email" required id="c-email" style="width:100%; padding:11px 12px; border:1px solid var(--grey-line); border-radius:4px; margin-bottom:16px; font-family:'Inter',sans-serif;">
+        <label style="display:block; font-size:0.82rem; color:var(--ink-soft); margin-bottom:6px;">What can we help with?</label>
+        <textarea required rows="5" id="c-msg" style="width:100%; padding:11px 12px; border:1px solid var(--grey-line); border-radius:4px; margin-bottom:20px; font-family:'Inter',sans-serif;"></textarea>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message — opens your email app</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-connect">
+      <span class="footer-connect-label">Connect</span>
+      <a href="mailto:olajumokemedunoye@gmail.com">Email</a>
+      <a href="https://github.com/olajumokemedunoye" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.fiverr.com/olajumokemed" target="_blank" rel="noopener">Fiverr</a>
+      <a href="https://www.notion.so/OlaDigitalHub-Launch-Ops-Hub-399750eba04e81f4a6fafd433add30ec" target="_blank" rel="noopener">Notion Hub</a>
+      <a href="https://payhip.com/OlaDigitalHub" target="_blank" rel="noopener">Payhip Store</a>
+    </div>
+    <div class="footer-bottom">
+    <span>© 2026 OlaDigitalHub. All rights reserved.</span>
+    <a href="index.html" style="color:#8FA3BC;">Back to home</a>
+  </div>
+</div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
