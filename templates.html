@@ -46,6 +46,40 @@
   </div>
 </section>
 
+<!-- FREE RESOURCES -->
+<section class="bg-grey">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Start Free</div>
+      <h2>Not ready to buy? Start here.</h2>
+      <p>Two free resources used by the same HR and People teams who go on to buy the templates below.</p>
+    </div>
+    <div class="grid-2">
+
+      <div class="card product-card" id="dashboard-checklist">
+        <div class="thumb"><span class="tag">PDF</span></div>
+        <h3>HR Dashboard Launch Checklist</h3>
+        <p style="font-size:0.92rem;">Board-ready in one week — the exact sequence to plan, build and launch an HR dashboard without redoing it twice.</p>
+        <div class="price-row">
+          <span class="price">Free</span>
+          <a href="https://payhip.com/b/gn6Gv" target="_blank" rel="noopener" class="btn btn-primary payhip-buy" style="padding:9px 16px;" data-product="hr-dashboard-launch-checklist" data-price="0">Get it free</a>
+        </div>
+      </div>
+
+      <div class="card product-card" id="kpi-cheat-sheet">
+        <div class="thumb"><span class="tag">PDF</span></div>
+        <h3>The HR KPI Cheat Sheet</h3>
+        <p style="font-size:0.92rem;">10 board-ready metrics, defined in plain English — the shortlist before you build the full dictionary.</p>
+        <div class="price-row">
+          <span class="price">Free</span>
+          <a href="https://payhip.com/b/A3rSF" target="_blank" rel="noopener" class="btn btn-primary payhip-buy" style="padding:9px 16px;" data-product="hr-kpi-cheat-sheet" data-price="0">Get it free</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- LAUNCH PRODUCTS -->
 <section style="padding-top:0;">
   <div class="wrap">
@@ -154,9 +188,10 @@
 document.querySelectorAll('.payhip-buy').forEach(btn => {
   btn.addEventListener('click', function () {
     if (typeof gtag === 'function') {
-      gtag('event', 'begin_checkout', {
+      const price = parseFloat(this.dataset.price) || 0;
+      gtag('event', price > 0 ? 'begin_checkout' : 'generate_lead', {
         currency: 'GBP',
-        value: parseFloat(this.dataset.price) || 0,
+        value: price,
         items: [{ item_id: this.dataset.product, item_name: this.dataset.product, quantity: 1 }]
       });
     }
