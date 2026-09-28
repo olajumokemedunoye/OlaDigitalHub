@@ -31,6 +31,6 @@ function sendContactEmail(e) {
   const msg  = document.getElementById('c-msg').value.trim();
   const subject = encodeURIComponent('Website enquiry from ' + name);
   const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + from + ')');
-  window.location.href = 'mailto:olajumokemedunoye@gmail.com?subject=' + subject + '&body=' + body;
+  window.location.href = 'mailto:medunoyeolajumoke@gmail.com?subject=' + subject + '&body=' + body;
   if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
 }
