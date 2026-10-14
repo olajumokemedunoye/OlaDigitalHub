@@ -26,18 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.matchMedia('(max-width:1100px)').addEventListener('change', () => setOpen(false));
 });
 
-// Contact form — composes a real email in the visitor's mail app (Outlook, Gmail, Apple Mail)
-function sendContactEmail(e) {
-  e.preventDefault();
-  const name = document.getElementById('c-name').value.trim();
-  const from = document.getElementById('c-email').value.trim();
-  const msg  = document.getElementById('c-msg').value.trim();
-  const subject = encodeURIComponent('Website enquiry from ' + name);
-  const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + from + ')');
-  window.location.href = 'mailto:olajumokemedunoye@gmail.com?subject=' + subject + '&body=' + body;
-  // Opening an email draft shows intent; it does not confirm delivery.
-  if (typeof gtag === 'function') gtag('event', 'contact_intent', { method: 'contact_form', delivery: 'unconfirmed' });
-}
+// A form submission attempt is not proof of email delivery. FormSubmit handles delivery.
+document.addEventListener('submit', event => {
+  if (event.target.matches('form[action^="https://formsubmit.co/"]') && typeof gtag === 'function') {
+    gtag('event', 'contact_submit_attempt', { method: 'formsubmit', confirmation_status: 'unconfirmed' });
+  }
+});
 
 // Measure booking-link intent only. Confirmed appointments are recorded by Calendly.
 document.addEventListener('click', event => {
