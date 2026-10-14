@@ -32,5 +32,6 @@ function sendContactEmail(e) {
   const subject = encodeURIComponent('Website enquiry from ' + name);
   const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + from + ')');
   window.location.href = 'mailto:olajumokemedunoye@gmail.com?subject=' + subject + '&body=' + body;
-  if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'contact_form' });
+  // Opening an email draft shows intent; it does not confirm delivery.
+  if (typeof gtag === 'function') gtag('event', 'contact_intent', { method: 'contact_form', delivery: 'unconfirmed' });
 }

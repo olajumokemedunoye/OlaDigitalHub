@@ -190,7 +190,7 @@ document.querySelectorAll('.payhip-buy').forEach(btn => {
   btn.addEventListener('click', function () {
     if (typeof gtag === 'function') {
       const price = parseFloat(this.dataset.price) || 0;
-      gtag('event', price > 0 ? 'begin_checkout' : 'generate_lead', {
+      gtag('event', price > 0 ? 'begin_checkout' : 'resource_request_click', {
         currency: 'GBP',
         value: price,
         items: [{ item_id: this.dataset.product, item_name: this.dataset.product, quantity: 1 }]
