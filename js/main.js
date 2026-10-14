@@ -38,3 +38,19 @@ function sendContactEmail(e) {
   // Opening an email draft shows intent; it does not confirm delivery.
   if (typeof gtag === 'function') gtag('event', 'contact_intent', { method: 'contact_form', delivery: 'unconfirmed' });
 }
+
+// Measure booking-link intent only. Confirmed appointments are recorded by Calendly.
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href*="calendly.com/oladigitalhub/30min"]');
+  if (link && typeof gtag === 'function') {
+    gtag('event', 'booking_link_click', { method: 'calendly', confirmation_status: 'unconfirmed' });
+  }
+});
+
+// Calendly's postMessage event confirms a successful booking in the embedded widget.
+window.addEventListener('message', event => {
+  if (event.origin !== 'https://calendly.com' || !event.data || typeof event.data.event !== 'string') return;
+  if (event.data.event === 'calendly.event_scheduled' && typeof gtag === 'function') {
+    gtag('event', 'generate_lead', { method: 'calendly', lead_type: 'confirmed_booking' });
+  }
+});
