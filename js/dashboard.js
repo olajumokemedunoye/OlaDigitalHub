@@ -1,3 +1,6 @@
+// Charts are an enhancement; the page keeps text summaries if the CDN is unavailable.
+if (typeof Chart !== 'undefined') {
+  Chart.defaults.animation = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 // Synthetic data for illustration only.
 const NAVY = '#1F3A5F';
 const TEAL = '#00A8A8';
@@ -60,3 +63,5 @@ new Chart(document.getElementById('chartTTH'), {
   },
   options: { responsive:true, plugins:{legend:{display:false}}, scales:{ y:{ beginAtZero:true } } }
 });
+
+}

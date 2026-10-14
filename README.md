@@ -54,5 +54,12 @@ The Executive HR Dashboard includes an Excel workbook and a Word Power BI build 
 ## Product and Academy interest
 Upcoming-product cards and the Academy page open prefilled emails to the business inbox. Visitors must send the email to register their interest. There is no automatic subscription, list storage or success confirmation on the website. Manage received requests in the inbox and reply only about the requested product or Academy launch. Planned prices may change.
 
+## Site maintenance
+All 17 HTML pages include a description, canonical URL and social sharing metadata. Keep `sitemap.xml` aligned when adding or removing pages.
+
+Navigation supports keyboard controls, Escape, outside-click dismissal and viewport changes. Links remain available when JavaScript is disabled. Sample dashboard figures are fixed synthetic values; chart summaries remain readable without Chart.js. The homepage does not randomise its sample metrics.
+
+Product, Academy and article-interest requests use email drafts. They are not automatic subscriptions. Contact intent is not a confirmed enquiry.
+
 ## Local preview
 Open `index.html` in a browser, or run `python3 -m http.server` in this folder.

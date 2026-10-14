@@ -1,27 +1,30 @@
-// Mobile nav toggle
+// Progressive enhancement: navigation remains available if JavaScript fails.
 document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('.nav');
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const open = links.style.display === 'flex';
-      links.style.display = open ? 'none' : 'flex';
-      links.style.cssText += open ? '' : 'flex-direction:column; position:absolute; top:64px; left:0; right:0; background:#fff; padding:20px 24px; border-bottom:1px solid #E1E6ED;';
-    });
-  }
-
-  // Hero KPI pulse — small randomized "live" feel on synthetic figures
-  document.querySelectorAll('[data-pulse]').forEach(el => {
-    const base = parseFloat(el.dataset.pulse);
-    const suffix = el.dataset.suffix || '';
-    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
-    setInterval(() => {
-      const jitter = (Math.random() - 0.5) * (base * 0.01);
-      el.textContent = (base + jitter).toFixed(decimals) + suffix;
-    }, 2600);
+  if (!nav || !toggle || !links) return;
+  nav.classList.add('nav-ready');
+  const setOpen = open => {
+    links.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  };
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
   });
+  links.addEventListener('click', event => {
+    if (event.target.closest('a')) setOpen(false);
+  });
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target)) setOpen(false);
+  });
+  window.matchMedia('(max-width:1100px)').addEventListener('change', () => setOpen(false));
 });
-
 
 // Contact form — composes a real email in the visitor's mail app (Outlook, Gmail, Apple Mail)
 function sendContactEmail(e) {
