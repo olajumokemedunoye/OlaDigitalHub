@@ -48,5 +48,11 @@ The static website does not emit `generate_lead` for clicks and cannot confirm e
 
 Historical `generate_lead` events from before this change may include contact-form or free-resource clicks. Do not treat those historic events as confirmed enquiries; use the deployment date as the reporting cutover.
 
+## Product descriptions and pricing
+The Executive HR Dashboard includes an Excel workbook and a Word Power BI build guide, not a finished .pbix report. The HR KPI Dictionary is a 23-page PDF with 60+ metrics, DAX and SQL examples. Displayed paid-product prices exclude applicable taxes; final totals are shown by Payhip before payment.
+
+## Product and Academy interest
+Upcoming-product cards and the Academy page open prefilled emails to the business inbox. Visitors must send the email to register their interest. There is no automatic subscription, list storage or success confirmation on the website. Manage received requests in the inbox and reply only about the requested product or Academy launch. Planned prices may change.
+
 ## Local preview
 Open `index.html` in a browser, or run `python3 -m http.server` in this folder.
