@@ -41,7 +41,7 @@ When a product URL changes, update its button in `templates.html` and this table
 |---|---|---|
 | `contact_intent` | Contact form opens an email draft; `delivery: unconfirmed` | No — the visitor must still send the email |
 | `resource_request_click` | Visitor clicks a free-resource link to Payhip | No — does not confirm download or contact details |
-| `begin_checkout` | Visitor clicks a paid-product link to Payhip | No — does not confirm a completed checkout |
+| `booking_link_click` | Visitor opens the Calendly booking page | No — booking is not confirmed |\n| `generate_lead` | Calendly embedded widget sends `calendly.event_scheduled` from the verified Calendly origin | Yes — scheduled in embedded widget; reconcile with Calendly records |\n| `begin_checkout` | Visitor clicks a paid-product link to Payhip | No — does not confirm a completed checkout |
 | Confirmed enquiry | An enquiry actually received in the inbox, or a confirmed Calendly booking | Measure from inbox / Calendly records |
 
 The static website does not emit `generate_lead` for clicks and cannot confirm email delivery. Report contact intent separately from confirmed enquiries. Do not mark intent events as confirmed-enquiry key events. Confirmed-enquiry automation would require a verified delivery or booking integration; it is not implemented here.
@@ -63,3 +63,6 @@ Product, Academy and article-interest requests use email drafts. They are not au
 
 ## Local preview
 Open `index.html` in a browser, or run `python3 -m http.server` in this folder.
+
+## Booking attribution
+The booking page tracks `generate_lead` only after a verified `calendly.event_scheduled` browser message from the embedded Calendly widget. This does not cover bookings completed on Calendly's external website, so Calendly's meeting records remain the authoritative total. `booking_link_click` measures intent only. Historical `generate_lead` definitions may differ; segment by date and `lead_type`.
