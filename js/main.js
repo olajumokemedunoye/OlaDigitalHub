@@ -41,10 +41,31 @@ document.addEventListener('click', event => {
   }
 });
 
-// Calendly's postMessage event confirms a successful booking in the embedded widget.
+// Product-page links express intent; the payment platform confirms orders and refunds.
+document.addEventListener('click', event => {
+  const link = event.target.closest('a.payhip-buy[data-product]');
+  if (!link || typeof gtag !== 'function') return;
+  const price = Number.parseFloat(link.dataset.price) || 0;
+  gtag('event', price > 0 ? 'product_link_click' : 'resource_request_click', {
+    method: 'payhip',
+    confirmation_status: 'unconfirmed',
+    currency: 'GBP',
+    value: price,
+    items: [{ item_id: link.dataset.product, item_name: link.dataset.product, price, quantity: 1 }]
+  });
+});
+
+// Only a completion message from this page's Calendly widget confirms a booking.
+const recordedBookings = new Set();
 window.addEventListener('message', event => {
   if (event.origin !== 'https://calendly.com' || !event.data || typeof event.data.event !== 'string') return;
-  if (event.data.event === 'calendly.event_scheduled' && typeof gtag === 'function') {
-    gtag('event', 'generate_lead', { method: 'calendly', lead_type: 'confirmed_booking' });
-  }
+  const frame = document.querySelector('#calendly-embed iframe');
+  if (!frame || event.source !== frame.contentWindow) return;
+  if (event.data.event !== 'calendly.event_scheduled' || typeof gtag !== 'function') return;
+  const booking = event.data.payload?.event?.uri || 'embedded-booking';
+  if (recordedBookings.has(booking)) return;
+  recordedBookings.add(booking);
+  gtag('event', 'generate_lead', {
+    method: 'calendly', lead_type: 'confirmed_booking', confirmation_status: 'confirmed'
+  });
 });

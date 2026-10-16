@@ -24,10 +24,11 @@ https://calendly.com/oladigitalhub/30min
 Availability and meeting settings are managed in Calendly. If the embedded calendar is blocked or unavailable, visitors can use **Open booking calendar** or the contact link.
 
 ## Product links
-The five buttons on `templates.html` already use direct Payhip product links:
+The six product buttons on `templates.html` already use direct Payhip product links:
 
 | Product | Direct link |
 |---|---|
+| HR Analytics Fundamentals | https://payhip.com/b/tl7CH |
 | HR Dashboard Launch Checklist | https://payhip.com/b/gn6Gv |
 | HR KPI Cheat Sheet | https://payhip.com/b/A3rSF |
 | Executive HR Dashboard | https://payhip.com/b/lH58G |
@@ -41,7 +42,9 @@ When a product URL changes, update its button in `templates.html` and this table
 |---|---|---|
 | `contact_submit_attempt` | A contact form POST is attempted to FormSubmit | No — does not confirm receipt or successful delivery |
 | `resource_request_click` | Visitor clicks a free-resource link to Payhip | No — does not confirm download or contact details |
-| `booking_link_click` | Visitor opens the Calendly booking page | No — booking is not confirmed |\n| `generate_lead` | Calendly embedded widget sends `calendly.event_scheduled` from the verified Calendly origin | Yes — scheduled in embedded widget; reconcile with Calendly records |\n| `begin_checkout` | Visitor clicks a paid-product link to Payhip | No — does not confirm a completed checkout |
+| `booking_link_click` | Visitor opens the Calendly booking page | No — booking is not confirmed |
+| `generate_lead` | Calendly embedded widget sends `calendly.event_scheduled` from the verified Calendly origin | Yes — scheduled in embedded widget; reconcile with Calendly records |
+| `product_link_click` | Visitor opens a paid-product page on Payhip | No — does not confirm a completed checkout |
 | Confirmed enquiry | An enquiry actually received in the inbox, or a confirmed Calendly booking | Measure from inbox / Calendly records |
 
 The static contact form cannot confirm delivery from the client-side event. Do not count `contact_submit_attempt` as a confirmed lead. FormSubmit requires email activation after first submission; a verified test and inbox confirmation are still outstanding. The Calendly embedded booking widget emits `generate_lead` only upon `calendly.event_scheduled`. Report contact intent separately from confirmed enquiries. Do not mark intent events as confirmed-enquiry key events. Confirmed-enquiry automation would require a verified delivery or booking integration; it is not implemented here.
@@ -71,4 +74,9 @@ The booking page tracks `generate_lead` only after a verified `calendly.event_sc
 The contact form now submits directly to FormSubmit rather than opening a mail draft. The **first real submission triggers a confirmation email** to `olajumokemedunoye@gmail.com`; the inbox owner must activate the endpoint. After activation, send a test enquiry and verify it arrives in the inbox (including spam). The form uses the third-party FormSubmit service; do not send sensitive HR/personnel data in this public form. If activation is incomplete, the mailto link remains available as a fallback. The client-side `contact_submit_attempt` event is not a delivered message.
 
 ## Sales verification (required)
-Payhip is an off-site checkout. Product button `begin_checkout` indicates outbound intent, **not** a completed sale. Read confirmed orders and refunds from Payhip reports and reconcile with payment receipts; do not invent `purchase` events in GA4 from outbound clicks. Obtain GA4 reports for landing pages, acquisition, `begin_checkout`, `contact_submit_attempt`, `booking_link_click`, and embedded `generate_lead`; external Calendly bookings need separate reconciliation. Revenue cannot be asserted without store records.
+Payhip is an off-site checkout. Product button `product_link_click` indicates outbound intent, **not** a completed sale. Read confirmed orders and refunds from Payhip reports and reconcile with payment receipts; do not invent `purchase` events in GA4 from outbound clicks. Obtain GA4 reports for landing pages, acquisition, `product_link_click`, `contact_submit_attempt`, `booking_link_click`, and embedded `generate_lead`; external Calendly bookings need separate reconciliation. Revenue cannot be asserted without store records.
+
+## Audit changes — 15 October 2026
+Paid product links now emit `product_link_click`, never `begin_checkout` or `purchase`. Historical begin_checkout events on this site represent product-link intent. The five standalone product pages now load GA4 and the shared product-click listener. HR Analytics Fundamentals is listed on the Templates page. Paid resources appear before the free resources.
+
+The booking page now uses Calendly\'s standard JavaScript inline widget; the previous bare iframe did not support documented postMessage tracking. The booking listener verifies the Calendly origin and the widget iframe source, and deduplicates repeated booking messages. External-calendar bookings still require reconciliation with Calendly. No test appointment was created. See https://calendly.com/help/advanced-calendly-embed-for-developers .
