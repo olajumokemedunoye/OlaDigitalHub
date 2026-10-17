@@ -13,7 +13,7 @@ Static HTML/CSS/JS — no build step, no dependencies. Deploys on GitHub Pages.
 | Payhip (`payhip.com/OlaDigitalHub`) | Direct product links on Templates page; store link in footer |
 | Fiverr (`fiverr.com/olajumokemed`) | Services page band + footer |
 | Notion (Launch Ops Hub) | Resources page band + footer |
-| Email | Contact page offers direct email drafts and Gmail compose; visitors must send their message in their email service |
+| Google Forms and email | Contact page embeds the published business enquiry form, with direct email and Gmail compose fallbacks |
 | Google Analytics 4 (`G-7EPNFPRV03`) | Page views and intent events described below |
 | Calendly | Live 30-minute booking calendar embedded on Book-a-call page, with a direct-link fallback |
 
@@ -45,9 +45,9 @@ When a product URL changes, update its button in `templates.html` and this table
 | `booking_link_click` | Visitor opens the Calendly booking page | No — booking is not confirmed |
 | `generate_lead` | Calendly embedded widget sends `calendly.event_scheduled` from the verified Calendly origin | Yes — scheduled in embedded widget; reconcile with Calendly records |
 | `product_link_click` | Visitor opens a paid-product page on Payhip | No — does not confirm a completed checkout |
-| Confirmed enquiry | An enquiry actually received in the inbox, or a confirmed Calendly booking | Measure from inbox / Calendly records |
+| Confirmed enquiry | A recorded Google Form response, an enquiry received in the inbox, or a confirmed Calendly booking | Measure from Forms / inbox / Calendly records; exclude technical tests |
 
-Email draft clicks cannot confirm delivery. The blocked FormSubmit endpoint was removed on 17 October 2026. Only messages actually received in the business inbox count as confirmed email enquiries. Historical `contact_submit_attempt` events remain intent only. The Calendly widget emits `generate_lead` only upon a verified `calendly.event_scheduled` message.
+Email draft clicks cannot confirm delivery. The blocked FormSubmit endpoint was replaced by a tested Google Form on 17 October 2026. Count recorded form responses and received inbox messages, excluding audit tests; opening either form or email draft is intent only. Historical `contact_submit_attempt` events remain intent only. The Calendly widget emits `generate_lead` only upon a verified `calendly.event_scheduled` message.
 
 Historical `generate_lead` events from before this change may include contact-form or free-resource clicks. Do not treat those historic events as confirmed enquiries; use the deployment date as the reporting cutover.
 
@@ -71,7 +71,7 @@ Open `index.html` in a browser, or run `python3 -m http.server` in this folder.
 The booking page tracks `generate_lead` only after a verified `calendly.event_scheduled` browser message from the embedded Calendly widget. This does not cover bookings completed on Calendly's external website, so Calendly's meeting records remain the authoritative total. `booking_link_click` measures intent only. Historical `generate_lead` definitions may differ; segment by date and `lead_type`.
 
 ## Contact delivery
-The former FormSubmit route was blocked by Browser Guard and has been removed. Contact buttons open an email draft or Gmail compose addressed to the public business inbox. They never report a sent message. A server-delivered web form would require a replacement service and verified inbox delivery before launch. No email was sent during this repair.
+The former FormSubmit route was blocked by Browser Guard and has been removed. The contact page now embeds a published Google Form owned by the business Google account: https://docs.google.com/forms/d/e/1FAIpQLScZKmv2odVDDeMtmTRr4LWf2E16MrPYL61lDka3-REoocT9Kw/viewform . It requires a manually entered email address and a paragraph message; Google sign-in is not required. Respondents cannot view other responses. Owner notifications are enabled. An authorised technical submission was recorded in Forms and its matching notification reached the business Gmail inbox on 17 October 2026. Exclude responses marked ODH-AUDIT or ODH-EMBED-AUDIT from lead reporting. Form responses remain in Forms and notifications link the owner to them. Email draft and Gmail compose buttons remain available as fallbacks and never report a sent message. The cross-origin form does not emit a confirmed-enquiry GA4 event; use Forms records for confirmation.
 
 ## Sales verification (required)
 Payhip is an off-site checkout. Product button `product_link_click` indicates outbound intent, **not** a completed sale. Read confirmed orders and refunds from Payhip reports and reconcile with payment receipts; do not invent `purchase` events in GA4 from outbound clicks. Obtain GA4 reports for landing pages, acquisition, `product_link_click`, `contact_link_click`, `booking_link_click`, and embedded `generate_lead`; external Calendly bookings need separate reconciliation. Revenue cannot be asserted without store records.
