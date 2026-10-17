@@ -26,10 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.matchMedia('(max-width:1100px)').addEventListener('change', () => setOpen(false));
 });
 
-// A form submission attempt is not proof of email delivery. FormSubmit handles delivery.
-document.addEventListener('submit', event => {
-  if (event.target.matches('form[action^="https://formsubmit.co/"]') && typeof gtag === 'function') {
-    gtag('event', 'contact_submit_attempt', { method: 'formsubmit', confirmation_status: 'unconfirmed' });
+// Email links open drafts; only inbox receipt confirms an enquiry.
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href]');
+  if (!link || typeof gtag !== 'function') return;
+  if (link.getAttribute('href').startsWith('mailto:olajumokemedunoye@gmail.com') ||
+      link.getAttribute('href').startsWith('https://mail.google.com/mail/?view=cm')) {
+    gtag('event', 'contact_link_click', { method: 'email', confirmation_status: 'unconfirmed' });
   }
 });
 

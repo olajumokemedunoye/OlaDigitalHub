@@ -13,7 +13,7 @@ Static HTML/CSS/JS — no build step, no dependencies. Deploys on GitHub Pages.
 | Payhip (`payhip.com/OlaDigitalHub`) | Direct product links on Templates page; store link in footer |
 | Fiverr (`fiverr.com/olajumokemed`) | Services page band + footer |
 | Notion (Launch Ops Hub) | Resources page band + footer |
-| FormSubmit | Contact form POSTs to a third-party email service; first submission triggers an activation email to the business inbox, and delivery must be tested after activation |
+| Email | Contact page offers direct email drafts and Gmail compose; visitors must send their message in their email service |
 | Google Analytics 4 (`G-7EPNFPRV03`) | Page views and intent events described below |
 | Calendly | Live 30-minute booking calendar embedded on Book-a-call page, with a direct-link fallback |
 
@@ -40,14 +40,14 @@ When a product URL changes, update its button in `templates.html` and this table
 ## Reporting definitions
 | Event / measure | Meaning | Confirmed enquiry or sale? |
 |---|---|---|
-| `contact_submit_attempt` | A contact form POST is attempted to FormSubmit | No — does not confirm receipt or successful delivery |
+| `contact_link_click` | Visitor opens an email draft | No — visitor must send the message; only inbox receipt confirms delivery |
 | `resource_request_click` | Visitor clicks a free-resource link to Payhip | No — does not confirm download or contact details |
 | `booking_link_click` | Visitor opens the Calendly booking page | No — booking is not confirmed |
 | `generate_lead` | Calendly embedded widget sends `calendly.event_scheduled` from the verified Calendly origin | Yes — scheduled in embedded widget; reconcile with Calendly records |
 | `product_link_click` | Visitor opens a paid-product page on Payhip | No — does not confirm a completed checkout |
 | Confirmed enquiry | An enquiry actually received in the inbox, or a confirmed Calendly booking | Measure from inbox / Calendly records |
 
-The static contact form cannot confirm delivery from the client-side event. Do not count `contact_submit_attempt` as a confirmed lead. FormSubmit requires email activation after first submission; a verified test and inbox confirmation are still outstanding. The Calendly embedded booking widget emits `generate_lead` only upon `calendly.event_scheduled`. Report contact intent separately from confirmed enquiries. Do not mark intent events as confirmed-enquiry key events. Confirmed-enquiry automation would require a verified delivery or booking integration; it is not implemented here.
+Email draft clicks cannot confirm delivery. The blocked FormSubmit endpoint was removed on 17 October 2026. Only messages actually received in the business inbox count as confirmed email enquiries. Historical `contact_submit_attempt` events remain intent only. The Calendly widget emits `generate_lead` only upon a verified `calendly.event_scheduled` message.
 
 Historical `generate_lead` events from before this change may include contact-form or free-resource clicks. Do not treat those historic events as confirmed enquiries; use the deployment date as the reporting cutover.
 
@@ -70,11 +70,11 @@ Open `index.html` in a browser, or run `python3 -m http.server` in this folder.
 ## Booking attribution
 The booking page tracks `generate_lead` only after a verified `calendly.event_scheduled` browser message from the embedded Calendly widget. This does not cover bookings completed on Calendly's external website, so Calendly's meeting records remain the authoritative total. `booking_link_click` measures intent only. Historical `generate_lead` definitions may differ; segment by date and `lead_type`.
 
-## Contact form activation (required)
-The contact form now submits directly to FormSubmit rather than opening a mail draft. The **first real submission triggers a confirmation email** to `olajumokemedunoye@gmail.com`; the inbox owner must activate the endpoint. After activation, send a test enquiry and verify it arrives in the inbox (including spam). The form uses the third-party FormSubmit service; do not send sensitive HR/personnel data in this public form. If activation is incomplete, the mailto link remains available as a fallback. The client-side `contact_submit_attempt` event is not a delivered message.
+## Contact delivery
+The former FormSubmit route was blocked by Browser Guard and has been removed. Contact buttons open an email draft or Gmail compose addressed to the public business inbox. They never report a sent message. A server-delivered web form would require a replacement service and verified inbox delivery before launch. No email was sent during this repair.
 
 ## Sales verification (required)
-Payhip is an off-site checkout. Product button `product_link_click` indicates outbound intent, **not** a completed sale. Read confirmed orders and refunds from Payhip reports and reconcile with payment receipts; do not invent `purchase` events in GA4 from outbound clicks. Obtain GA4 reports for landing pages, acquisition, `product_link_click`, `contact_submit_attempt`, `booking_link_click`, and embedded `generate_lead`; external Calendly bookings need separate reconciliation. Revenue cannot be asserted without store records.
+Payhip is an off-site checkout. Product button `product_link_click` indicates outbound intent, **not** a completed sale. Read confirmed orders and refunds from Payhip reports and reconcile with payment receipts; do not invent `purchase` events in GA4 from outbound clicks. Obtain GA4 reports for landing pages, acquisition, `product_link_click`, `contact_link_click`, `booking_link_click`, and embedded `generate_lead`; external Calendly bookings need separate reconciliation. Revenue cannot be asserted without store records.
 
 ## Audit changes — 15 October 2026
 Paid product links now emit `product_link_click`, never `begin_checkout` or `purchase`. Historical begin_checkout events on this site represent product-link intent. The five standalone product pages now load GA4 and the shared product-click listener. HR Analytics Fundamentals is listed on the Templates page. Paid resources appear before the free resources.
